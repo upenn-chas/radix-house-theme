@@ -1,0 +1,110 @@
+<?php
+
+use Drupal\Core\Form\FormStateInterface;
+
+/**
+ * @file
+ * Theme functions.
+ */
+
+// Include all files from the includes directory.
+$includes_path = dirname(__FILE__) . '/includes/*.inc';
+foreach (glob($includes_path) as $filename) {
+  require_once dirname(__FILE__) . '/includes/' . basename($filename);
+}
+
+function radix_house_theme_form_system_theme_settings_alter(&$form, FormStateInterface $form_state) {
+  // Add a new section to the theme settings form.
+  $form['radix_house_theme_settings'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Radix Splash Color'),
+    '#collapsible' => TRUE,
+    '#collapsed' => FALSE,
+  );
+
+  // Add a new color field to the section.
+  $form['radix_house_theme_settings']['radix_house_theme_color'] = array(
+    '#type' => 'color',
+    '#title' => t('Radix Splash Color'),
+    '#default_value' => theme_get_setting('radix_house_theme_color'),
+    '#description' => t('Choose a hex color for the Radix Splash.'),
+  );
+  
+  // Add a new markup element that displays the current value of the color field.
+  $form['radix_house_theme_settings']['radix_house_theme_color_value'] = array(
+    '#markup' => '<div>' . t('Selected color: @color', array('@color' => theme_get_setting('radix_house_theme_color'))) . '</div>',
+  ); 
+}
+
+/**
+ * Implements hook_token_info().
+ */
+function radix_house_theme_token_info() {
+  $info = array();
+
+  $info['tokens']['radix_house_theme']['color'] = array(
+    'name' => t('Radix Splash Color'),
+    'description' => t('The value of the Radix Splash color field.'),
+  );
+
+  return $info;
+}
+
+/**
+ * Implements hook_tokens().
+ */
+function radix_house_theme_tokens($type, $tokens, array $data, array $options, \Drupal\Core\Render\BubbleableMetadata $bubbleable_metadata) {
+  $replacements = array();
+
+  if ($type == 'radix_house_theme') {
+    foreach ($tokens as $name => $original) {
+      switch ($name) {
+        case 'color':
+          // Get the value of the color field from the theme settings.
+          $color = theme_get_setting('radix_house_theme_color');
+          // Set the replacement value to the color value.
+          $replacements[$original] = $color;
+          break;
+      }
+    }
+  }
+
+  return $replacements;
+}
+
+// Get the DOMAIN_NAME from the environment.
+// $domain_name = getenv('DOMAIN_NAME') ?? 'default_value';
+
+/**
+ * Implements hook_preprocess_HOOK() for page templates.
+ */
+function radix_house_theme_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  $domain_name = getenv('DOMAIN_NAME') ?? 'default_value';
+  // Add a template suggestion based on the domain name.
+  $suggestions[] = 'page__'.$domain_name;
+}
+
+/**
+ * Implements hook_preprocess_HOOK() for html.html.twig.
+ */
+function radix_house_theme_preprocess_html(array &$variables) {
+  $domain_name = getenv('DOMAIN_NAME') ?? 'default_value';
+  // Remove the default favicon link added by Drupal core.
+  foreach ($variables['#attached']['html_head_link'] as $key => $link) {
+    if ($link[0]['rel'] == 'icon' && $link[0]['href'] == '/core/misc/favicon.ico') {
+      unset($variables['#attached']['html_head_link'][$key]);
+    }
+  }
+
+  // Customize the favicon based on the domain name.
+  $favicon_url = '/themes/custom/radix_house_theme/favicon/' . str_replace('.', '_', $domain_name) . '_favicon.png';
+  // Add the favicon URL to the page.
+  $variables['#attached']['html_head_link'][] = [
+    [
+      'rel' => 'icon',
+      'href' => $favicon_url,
+      'type' => 'image/png',
+    ],
+    'radix_house_theme_favicon',
+  ];
+}

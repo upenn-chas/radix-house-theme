@@ -1,0 +1,322 @@
+/* Sample SCSS for adding Superfish CSS to themes.
+*/
+$superfish-1-color:#c6c4d3;
+$superfish-1-background-color-level-first: blue;
+// Menu Heasder
+$superfish-1-background-color-level-second: #27232e;
+$superfish-1-background-color-level-third: pink;
+// Manu drop back
+$superfish-1-background-color-level-fourth: #353442;
+
+.block--centrallinks-2 {
+  .sf-style-none {
+    float: right;
+    margin: 0;
+    padding: 0;
+    padding-right: 1rem;
+    &.sf-navbar {
+    }
+    ul {
+      padding-left: 0;
+      &.sf-multicolumn li {
+        &.sf-multicolumn-wrapper {
+          background: $superfish-1-background-color-level-fourth;
+          li {
+            background: transparent;
+          }
+        }
+      }
+    }
+    a {
+      color: white;
+      text-decoration: none;
+      padding: 0.75em 1em;
+      &.sf-with-ul {
+        padding-right: 2.25em;
+      }
+      &:focus {
+        background: $superfish-1-background-color-level-fourth;
+        outline: 0;
+      }
+      &:hover {
+        background: $superfish-1-background-color-level-fourth;
+        outline: 0;
+      }
+      &:active {
+        background: $superfish-1-background-color-level-fourth;
+        outline: 0;
+      }
+    }
+    span {
+      &.nolink {
+        color: $superfish-1-color;
+        padding: 0.75em 1em;
+        &.sf-with-ul {
+          padding-right: 2.25em;
+        }
+        &:hover {
+          background: $superfish-1-background-color-level-fourth;
+          outline: 0;
+        }
+      }
+      &.sf-description {
+        color: $superfish-1-color;
+        display: block;
+        font-size: 0.833em;
+        line-height: 1.5;
+        margin: 5px 0 0 5px;
+        padding: 0;
+      }
+    }
+    &.rtl {
+      span {
+        &.sf-description {
+          margin: 5px 5px 0 0;
+        }
+        &.nolink.sf-with-ul {
+          padding-left: 2.25em;
+          padding-right: 1em;
+        }
+      }
+      a.sf-with-ul {
+        padding-left: 2.25em;
+        padding-right: 1em;
+      }
+    }
+    li {
+      li {
+        background: $superfish-1-background-color-level-second;
+        li {
+          background: $superfish-1-background-color-level-third;
+        }
+      }
+      &:hover {
+        background: $superfish-1-background-color-level-fourth;
+        outline: 0;
+        > ul {
+          top: 40px;
+        }
+      }
+      &.sfHover {
+        background: $superfish-1-background-color-level-fourth;
+        outline: 0;
+        > ul {
+          top: 40px;
+        }
+      }
+    }
+    .sf-sub-indicator {
+      background-image: url('../images/dropdown-arrows.png');
+    }
+  }
+  div.sf-accordion-toggle {
+    &.sf-style-none a {
+      color: $superfish-1-color;
+      padding: 1em;
+      &.sf-expanded {
+        font-weight: bold;
+      }
+    }
+  }
+  .sf-menu.sf-style-none {
+    &.rtl {
+      &.sf-accordion li {
+        li {
+          a {
+            padding-left: auto;
+            padding-right: 2em;
+          }
+          li {
+            a {
+              padding-left: auto;
+              padding-right: 3em;
+            }
+            li {
+              a {
+                padding-left: auto;
+                padding-right: 4em;
+              }
+              li {
+                a {
+                  padding-left: auto;
+                  padding-right: 5em;
+                }
+                span.nolink {
+                  padding-left: auto;
+                  padding-right: 5em;
+                }
+              }
+              span.nolink {
+                padding-left: auto;
+                padding-right: 4em;
+              }
+            }
+            span.nolink {
+              padding-left: auto;
+              padding-right: 3em;
+            }
+          }
+          span.nolink {
+            padding-left: auto;
+            padding-right: 2em;
+          }
+        }
+      }
+      ul.sf-multicolumn {
+        li.sf-multicolumn-wrapper {
+          ol li {
+            &.sf-multicolumn-column {
+              float: right;
+            }
+          }
+        }
+      }
+    }
+    &.sf-accordion li {
+      &.sf-expanded {
+        background-image: url('../assets/images/background.png');
+        // background: $superfish-1-background-color-level-fourth;
+        > {
+          a {
+            font-weight: bold;
+          }
+          span.nolink {
+            font-weight: bold;
+          }
+        }
+      }
+      li {
+        a {
+          padding-left: 2em;
+        }
+        li {
+          a {
+            padding-left: 3em;
+          }
+          li {
+            a {
+              padding-left: 4em;
+            }
+            li {
+              a {
+                padding-left: 5em;
+              }
+              span.nolink {
+                padding-left: 5em;
+              }
+            }
+            span.nolink {
+              padding-left: 4em;
+            }
+          }
+          span.nolink {
+            padding-left: 3em;
+          }
+        }
+        span.nolink {
+          padding-left: 2em;
+        }
+      }
+      a.sf-accordion-button {
+        font-weight: bold;
+        position: absolute;
+        right: 0;
+        top: 0;
+        z-index: 499;
+      }
+    }
+    ul.sf-multicolumn {
+      li.sf-multicolumn-wrapper {
+        ol {
+          margin: 0;
+          padding: 0;
+          li {
+            margin: 0;
+            padding: 0;
+            &.sf-multicolumn-column {
+              display: inline;
+              float: left;
+            }
+          }
+        }
+        a.menuparent {
+          font-weight: bold;
+        }
+        span.nolink {
+          &.menuparent {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sf-accordion-toggle.sf-style-none > a::after {
+  content: "☰";
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  border: 2px solid white;
+  border-radius: 5px;
+  margin-left: 10px;
+  text-align: center;
+  line-height: 30px;
+  transition: all 0.6s ease;
+}
+
+.block--centrallinks-2 {
+}
+
+.block--centrallinks-2 .field--name-body {
+        position: absolute;
+        background-color: black;
+    }
+
+.sf-accordion-toggle.sf-style-none > a.sf-expanded::after {
+  content: "X";
+}
+
+#superfish-central-links-toggle span {
+display: none;}
+
+ul#superfish-section-one,
+ul#superfish-central-links,
+ul#superfish-snowmaid-adventures {
+  margin-bottom: 0px !important;
+  background-color:#26242e;
+  float: right;
+/*  max-width: 1320px; */
+}
+
+ul.sf-menu li.sfHover > ul {
+  background-color:#26242e;
+  border-bottom: 1px solid white;
+}
+
+#superfish-section-one-toggle,
+#superfish-central-links-toggle {
+  float: right;
+  padding: 0;
+  text-align: center;
+  display: block;
+  color: white;
+  background: none;
+}
+#superfish-section-one-toggle img,
+#superfish-central-links-toggle img {
+  max-width: 289px;
+}
+
+ul.sf-menu.sf-accordion.sf-expanded {
+margin-top: 1rem;
+}
+
+.stickynav-active { 
+  top: 0px !important;
+}
+
+.page-title {
+padding-top: 2rem;
+padding-bottom: 2rem;
+}

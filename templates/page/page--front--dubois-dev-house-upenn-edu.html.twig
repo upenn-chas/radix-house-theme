@@ -1,0 +1,97 @@
+{#
+/**
+ * @file
+ * Template for the main page.
+ */
+#}
+<div class="page">
+
+<div class="header-container">
+<div class="header">
+ <div class="right-region">
+    {% block right %}
+      {% if page.navbar_right %}
+        {{ page.navbar_right }}
+      {% endif %}
+    {% endblock %}
+ </div>
+
+<div class="branding">
+  <div class="container">
+    {% block branding %}
+      {% if page.navbar_branding %}
+        {{ page.navbar_branding }}
+      {% endif %}
+    {% endblock %}
+  </div>
+</div>
+<div class="menu_bar">
+{% block menu_bar %}
+      {% if page.menu_bar %}
+        {{ page.menu_bar }}
+      {% endif %}
+    {% endblock %}
+</div>
+</div>
+</div> 
+
+{#  {% embed '@radix_house_theme/navbar/navbar.twig' with {
+    placement: 'sticky-top',
+    container: 'fixed',
+    color: 'light',
+    utility_classes: ['bg-dark'],
+  } %}
+
+    {% block left %}
+      {% if page.navbar_left %}
+        <div class="mr-auto">
+          {{ page.navbar_left }}
+        </div>
+      {% endif %}
+    {% endblock %}
+
+  {% endembed %}
+#}
+
+<main class="row" id="house_main" >
+<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+<div class="slideshow_area">
+{% block slideshow_area %}
+      {% if page.slideshow_area %}
+        {{ page.slideshow_area }}
+      {% endif %}
+    {% endblock %}
+</div>
+<div class="body-content col-lg-8 col-12 order-lg-2">
+    {% if page.header %}
+      <header class="page__header ">
+        <div class="container">
+          {{ page.header }}
+        </div>
+      </header>
+    {% endif %}
+    {% if page.content %}
+      <div class="page__content">
+        <div class="container">
+          {{ page.content }}
+        </div>
+      </div>
+    {% endif %}
+</div>
+<div class="sidebar col-lg-4 col-12 order-lg-1">
+    {% if page.sidebar %}
+      <div class="sidebar__content">
+          {{ page.sidebar }}
+      </div>
+    {% endif %}
+<div>
+</main>
+
+  {% if page.footer %}
+    <footer class="page__footer">
+      <div class="container"><div class="row">
+          {{ page.footer }}
+      </div></div>
+    </footer>
+  {% endif %}
+</div>
